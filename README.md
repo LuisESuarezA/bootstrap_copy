@@ -15,6 +15,8 @@ This is a practice exercise for using GitHub, branching, merging, and publishing
 
 ```git add imagenes/cup.png```
 
+```git add README.md```
+
 ```git commit -m "Initial commit on branch lesa"```
 
 ```git push origin lesa```
