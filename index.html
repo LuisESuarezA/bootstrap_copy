@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tienda ITAM — Base limpia para agregar imágenes (Bootstrap 5.3)</title>
+  <!-- Bootstrap 5.3 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    /* ====== ESTILOS (solo clases) ====== */
+    .itam-topbar{background:#0b4730;color:#fff}
+    .itam-topbar a{color:#fff;text-decoration:none}
+    .itam-brand{font-weight:800;letter-spacing:.5px}
+    .itam-nav .nav-link{color:#111}
+    .itam-nav .nav-link:hover{color:#3a3a3a}
+
+    .hero-simple{background:#f6f6f6;border-radius:.75rem}
+
+    /* Contenedor para espacio de imagen con relación 1:1 o 21:9 */
+    .placeholder-img{background:#e9ecef;border-radius:.75rem;position:relative;overflow:hidden}
+    .ratio-1x1{aspect-ratio:1/1}
+    .ratio-21x9{aspect-ratio:21/9}
+    .placeholder-img::after{content:"Imagen aquí";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#6c757d;font-weight:600;letter-spacing:.5px}
+    img.fit-cover{width:100%;height:100%;object-fit:cover;border-radius:.75rem}
+
+    .section-title{font-weight:800}
+    .product-card{border:1px solid #eee;border-radius:.75rem;overflow:hidden;height:100%;transition:transform .15s,box-shadow .15s}
+    .product-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+    .product-img-wrap{border-bottom:1px solid #eee}
+    .price{font-weight:700}
+    .badge-offer{background:#d32f2f}
+    .badge-soldout{background:#6c757d}
+
+    .footer-min{border-top:1px solid #eee}
+    .pay-icon{display:inline-flex;align-items:center;gap:.5rem;border:1px solid #ddd;border-radius:.5rem;padding:.35rem .6rem;font-size:.9rem;background:#fff}
+  </style>
+</head>
+<body>
+  <!-- ====== TOPBAR ====== -->
+  <div class="itam-topbar py-1 small">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex flex-wrap gap-3">
+        <a href="#accesorios">Accesorios</a>
+        <a href="#papeleria">Papelería</a>
+        <a href="#ropa">Ropa</a>
+        <a href="#tazas">Tazas y termos</a>
+        <a href="#libreria">Librería</a>
+        <div class="dropdown d-inline">
+          <a class="dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Colecciones especiales</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#lamy">LAMY</a></li>
+            <li><a class="dropdown-item" href="#komoni">Komoni</a></li>
+            <li><a class="dropdown-item" href="#stanley">Stanley</a></li>
+            <li><a class="dropdown-item" href="#victorinox">Victorinox</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <a class="d-none d-sm-inline" href="#login">Iniciar sesión</a>
+        <a class="text-white" aria-label="X" href="#"><i class="bi bi-twitter-x"></i></a>
+        <a class="text-white" aria-label="Facebook" href="#"><i class="bi bi-facebook"></i></a>
+        <a class="text-white" aria-label="Instagram" href="#"><i class="bi bi-instagram"></i></a>
+        <a class="text-white" aria-label="TikTok" href="#"><i class="bi bi-tiktok"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== NAVBAR ====== -->
+  <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top itam-nav">
+    <div class="container">
+      <a class="navbar-brand itam-brand" href="#">Tienda ITAM</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#accesorios">Accesorios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#papeleria">Papelería</a></li>
+          <li class="nav-item"><a class="nav-link" href="#ropa">Ropa</a></li>
+          <li class="nav-item"><a class="nav-link" href="#tazas">Tazas y termos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#libreria">Librería</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Colecciones especiales</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#lamy">LAMY</a></li>
+              <li><a class="dropdown-item" href="#komoni">Komoni</a></li>
+              <li><a class="dropdown-item" href="#stanley">Stanley</a></li>
+              <li><a class="dropdown-item" href="#victorinox">Victorinox</a></li>
+            </ul>
+          </li>
+        </ul>
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary d-none d-sm-inline"><i class="bi bi-search"></i></button>
+          <a class="btn btn-outline-dark" href="#login"><i class="bi bi-person"></i> Iniciar sesión</a>
+          <a class="btn btn-dark" href="#carrito"><i class="bi bi-bag"></i> Carrito</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ====== Colección LAMY ====== -->
+  <section class="container mt-3">
+    <div class="hero-simple p-3 p-md-4">
+      <img class='fit-cover ratio-21x9 mb-3' src='imagenes/portada.png' alt='Banner ITAM'>
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <h1 class="h4 m-0">Colección LAMY</h1>
+        <a href="#colecciones" class="btn btn-success btn-sm">Ver colecciones</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="colecciones" class="container py-3">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2 class="section-title h5 m-0">Colecciones especiales · LAMY</h2>
+      <a class="btn btn-outline-dark btn-sm" href="#">Ver colección</a>
+    </div>
+    <div class="row g-3">
+      <!-- Tarjeta 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/lamy_verde_4.jpg?v=1758153122&width=533' alt='LAMY AL-star ITAM'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">LAMY AL-star Pluma Fuente - ITAM (edición especial)</h3>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge text-bg-danger badge-offer">Oferta</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <div class="price">$1,049.00 MXN</div>
+              </div>
+              <a class="btn btn-outline-dark btn-sm" href="#">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/LAMY_AL-star_Pluma_Fuente_Grafito.jpg?v=1758153261' alt='LAMY AL-star ITAM'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">LAMY AL-star Pluma Fuente - ITAM</h3>
+            <div class="d-flex justify-content-between align-items-end">
+              <div class="price">$1,000.00 MXN</div>
+              <a class="btn btn-outline-dark btn-sm" href="#">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 3 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/lamy_verde_3.jpg?v=1758153184&width=533' alt='LAMY Rollerball ITAM'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">LAMY Rollerball – ITAM (edición especial)</h3>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge text-bg-danger badge-offer">Oferta</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <div class="price">$849.00 MXN</div>
+              </div>
+              <a class="btn btn-outline-dark btn-sm" href="#">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- ====== BANNER TOTEBAG ====== -->
+  <section class="container mt-3">
+    <div class="hero-simple p-3 p-md-4">
+      <img class='fit-cover ratio-21x9 mb-3' src='imagenes/totebag.png' alt='Totebag'>
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <h1 class="h4 m-0">Totebag oficial ITAM</h1>
+      </div>
+    </div>
+      <!-- Tarjeta 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/TOTE_FARAH.png?v=1756840030&width=990' alt='LAMY AL-star ITAM'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Tote FARAH — ITAM</h3>
+            <div class="d-flex align-items-center gap-2 mb-2">
+              <span class="badge text-bg-danger badge-offer">Oferta</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <div class="price">Precio habitual$ 155.00 MXN</div>
+              </div>
+              <a class="btn btn-outline-dark btn-sm" href="#">Agregar al carrito</a>
+              <a class="btn btn-outline-dark btn-sm" href="#">Pagar con PayPal</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  <!-- ====== STANLEY ====== -->
+  <section id="stanley" class="container py-4">
+    <div class="hero-simple p-3 p-md-4">
+      <img class='fit-cover ratio-21x9 mb-3' src='imagenes/cup.png' alt='Colaboración Stanley'>
+      <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+        <h1 class="h4 m-0">Totebag oficial ITAM</h1>
+      </div>
+    </div>
+    <div class="row g-4">
+      <!-- Tarjeta 1 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/The_Quencher_H2.0_Flowstate_Tumbler_Gilded_887ML_Rosa.jpg?v=1757546004&width=533' alt='Quencher H2.0 887ml'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">The Quencher H2.0 Flowstate™ – 887ml</h3>
+            <span class="badge text-bg-danger badge-offer mb-2">Oferta</span>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <small class="text-muted text-decoration-line-through">$1,549.00</small>
+                <div class="price">$1,299.00 MXN</div>
+              </div>
+              <a class="btn btn-outline-dark btn-sm" href="#">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/Stanley_Classic_Legendary_Camp_Mug_355_ML_Negro.jpg?v=1757546467' alt='Camp Mug 355ml'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Classic Legendary Camp Mug – 355ml</h3>
+            <span class="badge text-bg-danger badge-offer mb-2">Oferta</span>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <small class="text-muted text-decoration-line-through">$1,039.00</small>
+                <div class="price">$829.00 MXN</div>
+              </div>
+              <a class="btn btn-outline-dark btn-sm" href="#">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/2cafeTOGOnegr.jpg?v=1757546734&width=1100' alt='Travel Mug 354ml'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Café‑To‑Go Travel Mug – 354ml</h3>
+            <span class="badge text-bg-danger badge-offer mb-2">Oferta</span>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <small class="text-muted text-decoration-line-through">$999.00</small>
+                <div class="price">$899.00 MXN</div>
+              </div>
+              <a class="btn btn-outline-dark btn-sm" href="#">Ver detalles</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 4 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/Stanley_Aerolight_Transit_Bottle_591ML_Verde.jpg?v=1757546946&width=533' alt='Transit Bottle 591ml'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Aerolight™ Transit Bottle – 591ml</h3>
+            <span class="badge text-bg-secondary badge-soldout mb-2">Agotado</span>
+            <div class="d-flex justify-content-between align-items-end">
+              <div>
+                <small class="text-muted text-decoration-line-through">$1,159.00</small>
+                <div class="price">$989.00 MXN</div>
+              </div>
+              <a class="btn btn-outline-dark btn-sm disabled" aria-disabled="true" href="#">No disponible</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== MÁS PRODUCTOS ====== -->
+  <section class="container py-4">
+    <h2 class="section-title h5 mb-3">Novedades y otros productos</h2>
+    <div class="row g-4">
+      <!-- Tarjeta 1 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/Stanley_Quencher_H2.0_Flowstate_Tumbler_Negro.jpg?v=1756146579&width=533' alt='R1 Producto 1'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Stanley Quencher H2.0 Flowstate™ Tumbler - ITAM | 887ml</h3>
+            <div class="price">$ 1,050.00 MXN</div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/JL_3668_TERMO_ITAM_-_RG-2.png?v=1738251037&width=533' alt='R1 Producto 2'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Termo para café | Visión ITAM 5.0</h3>
+            <div class="price">$200.00 MXN</div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/VISION-ITAM-5.0.png?v=1738253188&width=533' alt='R1 Producto 3'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Libreta ITAM - Visión 5.0</h3>
+            <div class="price">$160.00 MXN</div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 4 -->
+       <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/products/Tz_verde2_ITAM.jpg?v=1680218827&width=533' alt='R1 Producto 4'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Taza Caramelo ITAM</h3>
+            <div class="price">$220.00 MXN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row g-4">
+      <!-- Tarjeta 1 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/products/Colmillo-Peluche-2022-01.jpg?v=1660233543&width=533' alt='R2 Producto 1'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Stanley Quencher H2.0 Flowstate™ Tumbler - ITAM | 887ml</h3>
+            <div class="price">$ 1,050.00 MXN</div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 2 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/products/VTX_02.jpg?v=1673378785&width=533' alt='R2 Producto 2'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Termo para café | Visión ITAM 5.0</h3>
+            <div class="price">$200.00 MXN</div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 3 -->
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/files/JL3660TERMOITAM-RG-F-3.png?v=1738252036&width=533' alt='R2 Producto 3'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Libreta ITAM - Visión 5.0</h3>
+            <div class="price">$160.00 MXN</div>
+          </div>
+        </div>
+      </div>
+      <!-- Tarjeta 4 -->
+       <div class="col-12 col-md-6 col-lg-3">
+        <div class="product-card h-100">
+          <div class="product-img-wrap ratio-1x1"><img class='fit-cover' src='https://tienda.itam.mx/cdn/shop/products/cuadern_digi_02.jpg?v=1673394560&width=533' alt='R2 Producto 4'></div>
+          <div class="p-3">
+            <h3 class="h6 mb-1">Taza Caramelo ITAM</h3>
+            <div class="price">$220.00 MXN</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====== NOTA DE PICKUP ====== -->
+  <section class="container py-3">
+    <div class="alert alert-success m-0" role="alert">
+      PickUp disponible en Campus Río Hondo ITAM
+    </div>
+  </section>
+
+  <!-- ====== FOOTER ====== -->
+  <footer class="footer-min py-4 mt-4">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-12 col-md-6">
+          <div class="d-flex align-items-center gap-3 mb-2">
+            <a class="text-dark" aria-label="Facebook" href="#"><i class="bi bi-facebook fs-5"></i></a>
+            <a class="text-dark" aria-label="Instagram" href="#"><i class="bi bi-instagram fs-5"></i></a>
+            <a class="text-dark" aria-label="TikTok" href="#"><i class="bi bi-tiktok fs-5"></i></a>
+            <a class="text-dark" aria-label="X" href="#"><i class="bi bi-twitter-x fs-5"></i></a>
+          </div>
+          <small class="text-muted d-block">© 2025, Tienda ITAM (Este es un clon con fines educativos y ningun objetivo comercial)</small>
+          <div class="mt-2 d-flex flex-wrap gap-2 align-items-center">
+            <span class="pay-icon"><i class="bi bi-paypal"></i> PayPal</span>
+            <span class="pay-icon"><i class="bi bi-credit-card"></i> Tarjeta</span>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <ul class="list-unstyled m-0">
+            <li><a class="text-decoration-none text-dark" href="#">Política de reembolso</a></li>
+            <li><a class="text-decoration-none text-dark" href="#">Términos y condiciones</a></li>
+            <li><a class="text-decoration-none text-dark" href="#">Aviso de privacidad</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
